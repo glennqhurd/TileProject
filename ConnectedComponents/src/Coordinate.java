@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 public class Coordinate {
 	private int row;
@@ -18,13 +19,26 @@ public class Coordinate {
 	 
     @Override
     public boolean equals(Object o) {
-        if ((o instanceof Coordinate) && (((Coordinate) o).getValue() == this.value)) {
+        // self check
+        if (this == o)
             return true;
-        } else {
+        // null check
+        if (o == null)
             return false;
-        }
+        // type check and cast
+        if (getClass() != o.getClass())
+            return false;
+        Coordinate coordinate = (Coordinate) o;
+        // field comparison
+        return Objects.equals(row, coordinate.row)
+                && Objects.equals(column, coordinate.column);
     }
     
     @Override
-    
+    public int hashCode() {
+    	int result = 17;
+    	result = 37*result + row;
+    	result = 37*result + column;
+    	return result;
+    }
 }
