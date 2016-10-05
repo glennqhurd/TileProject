@@ -24,7 +24,7 @@ public class ConnectedComponents {
 	 * @return componentCount number of connected non ' ' sections of the tile
 	 */
 	public int findComponentCount(String[] piece) {
-		ArrayDeque<int[]> queue = new ArrayDeque<int[]>();
+		ArrayDeque<Coordinate> queue = new ArrayDeque<Coordinate>();
 		Set<Coordinate> visited = new HashSet<Coordinate>();
 		int componentCount = 0;
 		int width = piece[0].length();
@@ -40,56 +40,52 @@ public class ConnectedComponents {
 					LOGGER.log(Level.INFO, "Index[0] {0}", index[0]);
 					LOGGER.log(Level.INFO, "Index[1] {0}", index[1]);
 					visited.add(coordinate);
-					queue.add(index);
+					queue.add(coordinate);
 					componentCount++;
 					LOGGER.log(Level.INFO, "component added");
 				}
 				while (!queue.isEmpty()) {
-					int[] element = queue.pop();
-					int[] temp = {element[0] + 1, element[1]};
-					if ((temp[0] < height) && (temp[1] >= 0) && (!visited.contains(temp))) {
+					Coordinate element = queue.pop();
+					Coordinate queueCoordinate = new Coordinate(element.getRow() + 1, element.getColumn());
+					if ((queueCoordinate.getRow() < height) && (queueCoordinate.getColumn() >= 0) && (!visited.contains(queueCoordinate))) {
 						LOGGER.log(Level.INFO, "Inside flood down");
-						Coordinate queueCoordinate = new Coordinate(temp[0], temp[1]);
-						if (piece[temp[0]].charAt(temp[1]) != ' ') {
-							queue.add(temp);
-							visited.add(queueCoordinate);
-							LOGGER.log(Level.INFO, "temp1 value: {0}", temp[0]);
-							LOGGER.log(Level.INFO, "temp1 value 2: {0}", temp[1]);
+						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
+							queue.add(queueCoordinate);
+							LOGGER.log(Level.INFO, "temp1 value: {0}", queueCoordinate.getRow());
+							LOGGER.log(Level.INFO, "temp1 value 2: {0}", queueCoordinate.getColumn());
 						}
+						visited.add(queueCoordinate);
 					}
-					temp[0] = element[0]; 
-					temp[1] = element[1] + 1;
-					if ((temp[1] < width) && (temp[0] >= 0) && (!visited.contains(temp))) {
+					queueCoordinate.setRow(element.getRow()); 
+					queueCoordinate.setColumn(element.getColumn() + 1);
+					if ((queueCoordinate.getColumn() < width) && (queueCoordinate.getRow() >= 0) && (!visited.contains(queueCoordinate))) {
 						LOGGER.log(Level.INFO, "Inside flood right");
-						Coordinate queueCoordinate = new Coordinate(temp[0], temp[1]);
-						if (piece[temp[0]].charAt(temp[1]) != ' ') {
-							queue.add(temp);
-							visited.add(queueCoordinate);
+						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
+							queue.add(queueCoordinate);
 						}
+						visited.add(queueCoordinate);
 					}
-					temp[0] = element[0] - 1;
-					temp[1] = element[1];
-					if ((temp[0] >= 0) && (temp[1] >= 0) && (!visited.contains(temp))) {
+					queueCoordinate.setRow(element.getRow() - 1);
+					queueCoordinate.setColumn(element.getColumn());
+					if ((queueCoordinate.getRow() >= 0) && (queueCoordinate.getColumn() >= 0) && (!visited.contains(queueCoordinate))) {
 						LOGGER.log(Level.INFO, "Inside flood up");
-						Coordinate queueCoordinate = new Coordinate(temp[0], temp[1]);
-						if (piece[temp[0]].charAt(temp[1]) != ' ') {
-							queue.add(temp);
-							visited.add(queueCoordinate);
+						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
+							queue.add(queueCoordinate);
 							//LOGGER.log(Level.INFO, "temp1 value: {0}", temp[0]);
 							//LOGGER.log(Level.INFO, "temp1 value 2: {0}", temp[1]);
 						}
+						visited.add(queueCoordinate);
 					}
-					temp[0] = element[0];
-					temp[1] = element[1] - 1;
-					if ((temp[1] >= 0) && (!visited.contains(temp))) {
+					queueCoordinate.setRow(element.getRow());
+					queueCoordinate.setColumn(element.getColumn() - 1);
+					if ((queueCoordinate.getColumn() >= 0) && (!visited.contains(queueCoordinate))) {
 						LOGGER.log(Level.INFO, "Inside flood left");
-						Coordinate queueCoordinate = new Coordinate(temp[0], temp[1]);
-						if (piece[temp[0]].charAt(temp[1]) != ' ') {
-							queue.add(temp);
-							visited.add(queueCoordinate);
+						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
+							queue.add(queueCoordinate);
 							//LOGGER.log(Level.INFO, "temp1 value: {0}", temp[0]);
 							//LOGGER.log(Level.INFO, "temp1 value 2: {0}", temp[1]);
 						}
+						visited.add(queueCoordinate);
 					}
 				}
 			}
