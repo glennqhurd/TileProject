@@ -34,11 +34,10 @@ public class ConnectedComponents {
 				throw new IllegalArgumentException();
 			}
 			for (int j = 0; j < width; j++) {
-				int[] index = {i, j};
 				Coordinate coordinate = new Coordinate(i, j);
 				if ((piece[i].charAt(j) != ' ') && (!visited.contains(coordinate))) {
-					LOGGER.log(Level.INFO, "Index[0] {0}", index[0]);
-					LOGGER.log(Level.INFO, "Index[1] {0}", index[1]);
+					LOGGER.log(Level.INFO, "Coordinate row {0}", coordinate.getRow());
+					LOGGER.log(Level.INFO, "Coordinate column {0}", coordinate.getColumn());
 					visited.add(coordinate);
 					queue.add(coordinate);
 					componentCount++;
@@ -51,10 +50,10 @@ public class ConnectedComponents {
 						LOGGER.log(Level.INFO, "Inside flood down");
 						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
 							queue.add(queueCoordinate);
+							visited.add(queueCoordinate);
 							LOGGER.log(Level.INFO, "temp1 value: {0}", queueCoordinate.getRow());
 							LOGGER.log(Level.INFO, "temp1 value 2: {0}", queueCoordinate.getColumn());
 						}
-						visited.add(queueCoordinate);
 					}
 					queueCoordinate.setRow(element.getRow()); 
 					queueCoordinate.setColumn(element.getColumn() + 1);

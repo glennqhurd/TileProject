@@ -38,8 +38,8 @@ public class Coordinate {
             return false;
         Coordinate coordinate = (Coordinate) o;
         // field comparison
-        return Objects.equals(row, coordinate.row)
-                && Objects.equals(column, coordinate.column);
+        return Objects.equals(row, coordinate.getRow())
+                && Objects.equals(column, coordinate.getColumn());
     }
     
     @Override
