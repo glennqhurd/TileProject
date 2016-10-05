@@ -61,8 +61,8 @@ public class ConnectedComponents {
 						LOGGER.log(Level.INFO, "Inside flood right");
 						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
 							queue.add(queueCoordinate);
+							visited.add(queueCoordinate);
 						}
-						visited.add(queueCoordinate);
 					}
 					queueCoordinate.setRow(element.getRow() - 1);
 					queueCoordinate.setColumn(element.getColumn());
@@ -70,10 +70,10 @@ public class ConnectedComponents {
 						LOGGER.log(Level.INFO, "Inside flood up");
 						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
 							queue.add(queueCoordinate);
+							visited.add(queueCoordinate);
 							//LOGGER.log(Level.INFO, "temp1 value: {0}", temp[0]);
 							//LOGGER.log(Level.INFO, "temp1 value 2: {0}", temp[1]);
 						}
-						visited.add(queueCoordinate);
 					}
 					queueCoordinate.setRow(element.getRow());
 					queueCoordinate.setColumn(element.getColumn() - 1);
@@ -81,10 +81,10 @@ public class ConnectedComponents {
 						LOGGER.log(Level.INFO, "Inside flood left");
 						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
 							queue.add(queueCoordinate);
+							visited.add(queueCoordinate);
 							//LOGGER.log(Level.INFO, "temp1 value: {0}", temp[0]);
 							//LOGGER.log(Level.INFO, "temp1 value 2: {0}", temp[1]);
 						}
-						visited.add(queueCoordinate);
 					}
 				}
 			}
