@@ -1,8 +1,8 @@
 import java.util.Objects;
 
 public class Coordinate {
-	private int row;
-	private int column;
+	private final int row;
+	private final int column;
 	 
 	Coordinate(int row, int column) {
        this.row = row;
@@ -15,14 +15,6 @@ public class Coordinate {
 	
 	public int getColumn() {
 		return column;
-	}
-	
-	public void setRow(int row) {
-		this.row = row;
-	}
-	
-	public void setColumn(int column) {
-		this.column = column;
 	}
 	 
     @Override

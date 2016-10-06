@@ -45,43 +45,40 @@ public class ConnectedComponents {
 				}
 				while (!queue.isEmpty()) {
 					Coordinate element = queue.pop();
-					Coordinate queueCoordinate = new Coordinate(element.getRow() + 1, element.getColumn());
-					if ((queueCoordinate.getRow() < height) && (queueCoordinate.getColumn() >= 0) && (!visited.contains(queueCoordinate))) {
+					Coordinate queueCoordinateD = new Coordinate(element.getRow() + 1, element.getColumn());
+					if ((queueCoordinateD.getRow() < height) && (queueCoordinateD.getColumn() >= 0) && (!visited.contains(queueCoordinateD))) {
 						LOGGER.log(Level.INFO, "Inside flood down");
-						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
-							queue.add(queueCoordinate);
-							visited.add(queueCoordinate);
-							LOGGER.log(Level.INFO, "temp1 value: {0}", queueCoordinate.getRow());
-							LOGGER.log(Level.INFO, "temp1 value 2: {0}", queueCoordinate.getColumn());
+						if (piece[queueCoordinateD.getRow()].charAt(queueCoordinateD.getColumn()) != ' ') {
+							queue.add(queueCoordinateD);
+							visited.add(queueCoordinateD);
+							LOGGER.log(Level.INFO, "temp1 value: {0}", queueCoordinateD.getRow());
+							LOGGER.log(Level.INFO, "temp1 value 2: {0}", queueCoordinateD.getColumn());
 						}
 					}
-					queueCoordinate.setRow(element.getRow()); 
-					queueCoordinate.setColumn(element.getColumn() + 1);
-					if ((queueCoordinate.getColumn() < width) && (queueCoordinate.getRow() >= 0) && (!visited.contains(queueCoordinate))) {
+					Coordinate queueCoordinateR = new Coordinate(element.getRow(), element.getColumn() + 1);
+					if ((queueCoordinateR.getColumn() < width) && (queueCoordinateR.getRow() >= 0) && (!visited.contains(queueCoordinateR))) {
 						LOGGER.log(Level.INFO, "Inside flood right");
-						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
-							queue.add(queueCoordinate);
-							visited.add(queueCoordinate);
+						if (piece[queueCoordinateR.getRow()].charAt(queueCoordinateR.getColumn()) != ' ') {
+							queue.add(queueCoordinateR);
+							visited.add(queueCoordinateR);
 						}
 					}
-					queueCoordinate.setRow(element.getRow() - 1);
-					queueCoordinate.setColumn(element.getColumn());
-					if ((queueCoordinate.getRow() >= 0) && (queueCoordinate.getColumn() >= 0) && (!visited.contains(queueCoordinate))) {
+					Coordinate queueCoordinateU = new Coordinate(element.getRow() - 1, element.getColumn());
+					if ((queueCoordinateU.getRow() >= 0) && (queueCoordinateU.getColumn() >= 0) && (!visited.contains(queueCoordinateU))) {
 						LOGGER.log(Level.INFO, "Inside flood up");
-						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
-							queue.add(queueCoordinate);
-							visited.add(queueCoordinate);
+						if (piece[queueCoordinateU.getRow()].charAt(queueCoordinateU.getColumn()) != ' ') {
+							queue.add(queueCoordinateU);
+							visited.add(queueCoordinateU);
 							//LOGGER.log(Level.INFO, "temp1 value: {0}", temp[0]);
 							//LOGGER.log(Level.INFO, "temp1 value 2: {0}", temp[1]);
 						}
 					}
-					queueCoordinate.setRow(element.getRow());
-					queueCoordinate.setColumn(element.getColumn() - 1);
-					if ((queueCoordinate.getColumn() >= 0) && (!visited.contains(queueCoordinate))) {
+					Coordinate queueCoordinateL = new Coordinate(element.getRow(), element.getColumn() - 1);
+					if ((queueCoordinateL.getColumn() >= 0) && (!visited.contains(queueCoordinateL))) {
 						LOGGER.log(Level.INFO, "Inside flood left");
-						if (piece[queueCoordinate.getRow()].charAt(queueCoordinate.getColumn()) != ' ') {
-							queue.add(queueCoordinate);
-							visited.add(queueCoordinate);
+						if (piece[queueCoordinateL.getRow()].charAt(queueCoordinateL.getColumn()) != ' ') {
+							queue.add(queueCoordinateL);
+							visited.add(queueCoordinateL);
 							//LOGGER.log(Level.INFO, "temp1 value: {0}", temp[0]);
 							//LOGGER.log(Level.INFO, "temp1 value 2: {0}", temp[1]);
 						}
